@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _fetchMenuForDay(String day) async {
     try {
       final response =
-      await http.get(Uri.parse('http://localhost:3000/getMenuForDay/$day'));
+      await http.get(Uri.parse('https://two6mess.onrender.com/getMenuForDay/$day'));
 
       if (response.statusCode == 200) {
         // Decode the JSON response

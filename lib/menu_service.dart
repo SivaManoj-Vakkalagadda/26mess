@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MenuService {
-  // Replace with your backend URL
-  final String baseUrl = 'http://172.22.208.1:3000';
+  // Replace with your Render API URL
+  final String baseUrl = 'https://two6mess.onrender.com';  // Updated URL
 
   Future<Map<String, dynamic>> getMenuForDay(String day) async {
     final response = await http.get(Uri.parse('$baseUrl/getMenuForDay/$day'));
