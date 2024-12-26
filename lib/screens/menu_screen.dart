@@ -43,8 +43,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedDayIndex =
-  getCurrentDayAsInt(); // Automatically set to today's day
+  int selectedDayIndex = getCurrentDayAsInt(); // Automatically set to today's day
   Map<String, dynamic> todaysMenu = {}; // To store the fetched menu data
   final List<String> daysOfTheWeek = [
     'Monday',
@@ -71,8 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // Function to fetch menu for the selected day
   Future<void> _fetchMenuForDay(String day) async {
     try {
-      final response =
-      await http.get(Uri.parse('https://two6mess.onrender.com/getMenuForDay/$day'));
+      final String baseUrl = 'https://two6mess.onrender.com'; // Ensure HTTPS URL
+      final response = await http.get(Uri.parse('$baseUrl/getMenuForDay/$day'));
 
       if (response.statusCode == 200) {
         // Decode the JSON response
@@ -113,15 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String currentDate =
-    DateFormat('EEEE, MMMM d, yyyy').format(DateTime.now());
+    String currentDate = DateFormat('EEEE, MMMM d, yyyy').format(DateTime.now());
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double horizontalPadding =
-        screenWidth * 0.1; // 10% of screen width for horizontal padding
-    double verticalPadding =
-        screenHeight * 0.1; // 10% of screen height for top and bottom padding
+    double horizontalPadding = screenWidth * 0.1; // 10% of screen width for horizontal padding
+    double verticalPadding = screenHeight * 0.1; // 10% of screen height for top and bottom padding
 
     // Fallback if no data is fetched yet
     if (todaysMenu.isEmpty) {

@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-class ComplaintRegister extends StatelessWidget {
+class ComplaintRegister extends StatefulWidget {
   const ComplaintRegister({super.key});
+
+  @override
+  _ComplaintRegisterState createState() => _ComplaintRegisterState();
+}
+
+class _ComplaintRegisterState extends State<ComplaintRegister> {
+  // Controllers for the text fields
+  final TextEditingController rollNoController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController complaintController = TextEditingController();
 
   void _submitForm(
       BuildContext context,
@@ -28,7 +38,6 @@ class ComplaintRegister extends StatelessWidget {
 
     var finalURI = Uri.parse(scriptURL + queryString);
     var response = await http.get(finalURI);
-    //print(finalURI);
 
     if (response.statusCode == 200) {
       var bodyR = convert.jsonDecode(response.body);
@@ -54,14 +63,9 @@ class ComplaintRegister extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double horizontalPadding =
-        screenWidth * 0.2; // 20% of screen width for horizontal padding
+        screenWidth * 0.1; // 10% of screen width for horizontal padding
     double verticalPadding =
         screenHeight * 0.1; // 10% of screen height for vertical padding
-
-    // Controllers for the text fields
-    final TextEditingController rollNoController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController complaintController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -74,9 +78,8 @@ class ComplaintRegister extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: horizontalPadding, vertical: verticalPadding),
             child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
               child: Container(
-                width: screenWidth * 0.9, // 80% of the screen width
+                width: screenWidth * 0.9, // 90% of the screen width
                 decoration: BoxDecoration(
                   color: Colors.white, // White background for the container
                   borderRadius: BorderRadius.circular(
@@ -90,8 +93,7 @@ class ComplaintRegister extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(
-                      16.0), // Padding inside the container
+                  padding: const EdgeInsets.all(16.0), // Padding inside the container
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
