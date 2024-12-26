@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687007147301",
+    "project_id": "messiitgoa",
+    "storage_bucket": "messiitgoa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687007147301:android:32625977000333ffb966cc",
+        "android_client_info": {
+          "package_name": "com.google.MIITGoa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2iHDvq73KoDMWGDWCW4yg638bTivvc-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
