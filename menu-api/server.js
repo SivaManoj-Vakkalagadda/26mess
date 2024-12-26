@@ -2,14 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const port = 3000; // or any available port
 
-// Enable CORS for Flutter
+// Get port from environment variables (use Render's assigned port)
+const port = process.env.PORT || 3000; // Port is dynamically set on Render
+
+// Enable CORS for Flutter (you may add your Flutter app URL here for better security)
 app.use(cors());
+
+// Enable JSON parsing
 app.use(express.json());
 
-// MongoDB Connection (Replace with your MongoDB URI)
-mongoose.connect('mongodb+srv://mess_secy:mess_iitgoa@messcluster.olmgi.mongodb.net/mess_iit?retryWrites=true&w=majority&appName=messCluster')
+// MongoDB Connection (Use environment variable for MongoDB URI)
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://mess_secy:mess_iitgoa@messcluster.olmgi.mongodb.net/mess_iit?retryWrites=true&w=majority'; // Use .env to store MongoDB URI securely
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -17,7 +23,7 @@ mongoose.connect('mongodb+srv://mess_secy:mess_iitgoa@messcluster.olmgi.mongodb.
     console.error('Error connecting to MongoDB:', err);
   });
 
-// Menu Schema
+// Menu Schema definition
 const menuSchema = new mongoose.Schema({
   day: String,
   breakfast: [String],
@@ -26,7 +32,8 @@ const menuSchema = new mongoose.Schema({
   dinner: [String],
 });
 
-const Menu = mongoose.model('Menu', menuSchema,'menu');
+// Model based on the schema
+const Menu = mongoose.model('Menu', menuSchema, 'menu');
 
 // Root Route (Optional)
 app.get('/', (req, res) => {
@@ -41,14 +48,14 @@ app.get('/getMenuForDay/:day', async (req, res) => {
     if (!menuData) {
       return res.status(404).send('Menu not found for this day');
     }
-    res.json(menuData);
+    res.json(menuData); // Send the fetched menu data as JSON
   } catch (err) {
     console.error('Error fetching menu:', err);
     res.status(500).send('Server error');
   }
 });
 
-// Start the server
+// Start the server and listen on the assigned port
 app.listen(port, () => {
-  console.log(`Server running at http://172.22.208.1:${port}`);
+  console.log(`Server running on port ${port}`);
 });
